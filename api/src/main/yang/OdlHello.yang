@@ -1,0 +1,38 @@
+module OdlHello {
+    yang-version 1;
+    namespace "urn:opendaylight:params:xml:ns:yang:OdlHello";
+    prefix "OdlHello";
+    import opendaylight-inventory {prefix inv;revision-date "2013-08-19";}
+
+    revision "2015-01-05" {
+        description "Initial revision of OdlHello model";
+    }
+        rpc send-packet{
+                input{
+                        leaf rawpacket{
+                                type binary;
+                        }
+
+                        leaf egress {
+                                type inv:node-connector-ref;
+                        }
+
+                        leaf node {
+                                type inv:node-ref;
+                        }
+
+                }
+                output{
+                        leaf result{
+                                type string;
+                        }
+                }
+        }
+
+        notification say{
+            leaf message{
+                type string;
+            }
+        }
+
+}
