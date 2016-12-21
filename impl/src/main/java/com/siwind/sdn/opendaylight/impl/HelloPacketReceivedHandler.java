@@ -70,7 +70,7 @@ public class HelloPacketReceivedHandler implements PacketProcessingListener {
 
 		String dstMac = byteToHexStr(dstMacRaw, ":");
 		String srcMac = byteToHexStr(srcMacRaw, ":");
-        String ethStr = byteToHexStr(ethType, "");
+      String ethStr = byteToHexStr(ethType, "");
 
 		LOG.info("[Siwind] Received packet from MAC {} to MAC {}, EtherType=0x{} ", srcMac, dstMac, ethStr);
 	}
@@ -111,12 +111,13 @@ public class HelloPacketReceivedHandler implements PacketProcessingListener {
 			if( str.length()<=1 ){
 				macStr.append("0");
 			}
-			macStr.append(str + delimit);
-		}
+			macStr.append(str);
+			
+			if( i < bts.length -1 ){  //not add last delimit!!
+				macStr.append(delimit);
+			}
+		} // end of for !
 		
-		if( delimit.length()>=1 ){
-			macStr.setCharAt(macStr.length() - 1, ' ');
-		}
 		return macStr.toString();
 	}
 
